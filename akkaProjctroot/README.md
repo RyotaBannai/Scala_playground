@@ -92,3 +92,6 @@
   - `If tasks are not completed within a configured timeout (see reference.conf) the next phase will be started anyway`. It is possible to configure `recover=off` for a phase `to abort the rest of the shutdown process if a task fails or is not completed within the timeout`.
   - Tasks should typically be registered as early as possible after system startup. When running the coordinated shutdown tasks that have been registered will be performed but tasks that are added too late will not be run.
   - The `coordinated shutdown process` is also started once `the actor system’s root actor is stopped`.
+- `Dispatcher`:
+  - By default a `Dispatcher` with the configured `akka.actor.default-dispatcher.executor` is used. If no executor is selected a `fork-join-executor` is selected, which gives excellent performance in most cases.
+  - To protect the internal Actors that are spawned by the various Akka modules, `a separate internal dispatcher is used by default`. The internal dispatcher can be tuned in a fine-grained way with the setting `akka.actor.internal-dispatcher`, it can also be replaced by another dispatcher by making `akka.actor.internal-dispatcher`
