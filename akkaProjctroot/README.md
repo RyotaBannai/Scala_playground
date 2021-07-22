@@ -95,3 +95,5 @@
 - `Dispatcher`:
   - By default a `Dispatcher` with the configured `akka.actor.default-dispatcher.executor` is used. If no executor is selected a `fork-join-executor` is selected, which gives excellent performance in most cases.
   - To protect the internal Actors that are spawned by the various Akka modules, `a separate internal dispatcher is used by default`. The internal dispatcher can be tuned in a fine-grained way with the setting `akka.actor.internal-dispatcher`, it can also be replaced by another dispatcher by making `akka.actor.internal-dispatcher`
+- `Mailbox`:
+  - The `unbounded mailbox` is a convenient default but in a scenario where messages are added to the mailbox faster than the actor can process them, this can lead to the application running `out of memory`. For this reason a `bounded mailbox` can be specified, the `bounded mailbox` will pass new messages to `deadletters` when the mailbox is full.
