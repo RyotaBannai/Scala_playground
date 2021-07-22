@@ -72,7 +72,7 @@ class AsyncTestExprSpec extends AnyWordSpec with BeforeAndAfterAll with Matchers
       /*
        monitor: Behavior decorator that copies all received message to the designated monitor
        akka.actor.typed.ActorRef before invoking the wrapped behavior.
-       This is not used as result check, but used for capturing messages sent between actors interaction.
+       This is not used as a result checking, but used for capturing messages sent between actors interaction.
        In the example below, capturing message from publish ask to mockedBehavior.
        */
       val probe           = createTestProbe[Message]()
@@ -83,10 +83,14 @@ class AsyncTestExprSpec extends AnyWordSpec with BeforeAndAfterAll with Matchers
       producer.produce(messages)
 
       for (i <- 0 until messages) {
+        /*
+        expectMessageType: used for async testing.
+        If you add one to messages, it will cause Timeout(3 seconds) during expectMessageClass waiting for ...
+        because the fourth message would never come.
+         */
         val msg = probe.expectMessageType[Message]
         msg.i shouldBe i
       }
-
     }
   }
 
