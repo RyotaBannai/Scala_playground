@@ -90,3 +90,5 @@
     - `before-actor-system-terminate`: Phase for custom application tasks that are to be run `after cluster shutdown and before ActorSystem termination`.
   - Tasks added to the same phase are executed in `parallel` without any ordering assumptions. Next phase `will not` start until all tasks of previous phase have been completed.
   - `If tasks are not completed within a configured timeout (see reference.conf) the next phase will be started anyway`. It is possible to configure `recover=off` for a phase `to abort the rest of the shutdown process if a task fails or is not completed within the timeout`.
+  - Tasks should typically be registered as early as possible after system startup. When running the coordinated shutdown tasks that have been registered will be performed but tasks that are added too late will not be run.
+  - The `coordinated shutdown process` is also started once `the actor system’s root actor is stopped`.
