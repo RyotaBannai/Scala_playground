@@ -35,3 +35,9 @@ object HttpServerRoutingMinimal {
     //#server-bootstrapping
   }
 } // end of object HttpServerRoutingMinimal
+
+/*
+import akka.http.scaladsl.model._  // for HttpMethods
+import HttpMethods._               // for Uri
+import Uri._                       // for Query
+ */
