@@ -7,6 +7,10 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.model.StatusCodes
 
 // for JSON serialization/deserialization following dependency is required:
+/*
+  import the FromEntityUnmarshaller[T] and ToEntityMarshaller[T] implicits directly from SprayJsonSupport
+  or mix the akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport trait into your JSON support module(like, object SprayJsonExample with SprayJsonSupport {...}).
+ */
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import spray.json.DefaultJsonProtocol._
 
@@ -42,7 +46,7 @@ object SprayJsonExample {
   }
 
   /*
-  Transforming request and response bodies between over-the-wire formats
+  Transforming request and response bodies between over-the-wire formats(wire format, other popular names for marshalling are "serialization" or "pickling")
   and objects to be used in your application is done separately from the route declarations,
   in marshallers, which are pulled in implicitly using the “magnet” pattern.
 
